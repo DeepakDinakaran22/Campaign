@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1321
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campaign.UI", "Campaign\Campaign.UI.csproj", "{F6A6379C-F0E6-4F00-A8FB-9CD401E507C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campaign.UI", "Campaign.UI\Campaign.UI.csproj", "{F6A6379C-F0E6-4F00-A8FB-9CD401E507C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campaign.Business", "Campaign.Business\Campaign.Business.csproj", "{5D8AFFD5-2CF4-4D1B-B499-5A5F068CDADB}"
 EndProject
