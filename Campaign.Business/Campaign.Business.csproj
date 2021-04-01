@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Campaign.Data\Campaign.Data.csproj" />
     <ProjectReference Include="..\Campaign.Models\Campaign.Models.csproj" />
   </ItemGroup>
 
