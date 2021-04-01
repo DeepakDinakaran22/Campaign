@@ -2,8 +2,10 @@
 
 namespace Campaign.Data
 {
-    using Microsoft.EntityFrameworkCore;
+    //using Microsoft.EntityFrameworkCore;
     using Campaign.Data.Entities;
+    using Microsoft.EntityFrameworkCore;
+
     public class CampaignContext : DbContext
     {
         public CampaignContext()

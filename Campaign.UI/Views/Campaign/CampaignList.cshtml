@@ -4,6 +4,7 @@
         if (args.type === 'Editor') {
             $(args.element).find('.e-title-text').text("Edit Campaign");
             $(args.element).find('.e-event-delete').css("display","none");
+
             var statusElement = args.element.querySelector('#EventType');
             if (!statusElement.classList.contains('e-dropdownlist')) {
                 var dropDownListObject = new ej.dropdowns.DropDownList({
@@ -13,14 +14,20 @@
                 dropDownListObject.appendTo(statusElement);
                 statusElement.setAttribute('name', 'EventType');
             }
+
             var startElement = args.element.querySelector('#StartTime');
             if (!startElement.classList.contains('e-datetimepicker')) {
                 new ej.calendars.DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
             }
+
             var endElement = args.element.querySelector('#EndTime');
             if (!endElement.classList.contains('e-datetimepicker')) {
                 new ej.calendars.DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
             }
+
+            $(args.element).find(".e-event-save").off("click").on("click", function () {
+                console.log("hello world!!!");
+            });
         }
         else if (args.type === 'QuickInfo') {
             $(args.element).find('.e-delete, .e-event-delete').css("display", "none");
