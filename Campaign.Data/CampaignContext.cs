@@ -2,7 +2,6 @@
 
 namespace Campaign.Data
 {
-    //using Microsoft.EntityFrameworkCore;
     using Campaign.Data.Entities;
     using Microsoft.EntityFrameworkCore;
 
@@ -16,8 +15,13 @@ namespace Campaign.Data
         {
 
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(ConnectionService.connstring);
+        }
         public virtual DbSet<Campaign> Campaign { get; set; }
         public virtual DbSet<Job> Job { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,6 +55,31 @@ namespace Campaign.Data
                 entity.Property(e => e.NetworkId)
                 .HasColumnName("NetworkID")
                 .IsUnicode(false);
+
+                entity.Property(e => e.ItemName)
+                .HasColumnName("Item_Name")
+                .IsUnicode(false);
+
+                entity.Property(e => e.ItemRef)
+                .HasColumnName("item_Ref")
+                .IsUnicode(false);
+
+                entity.Property(e => e.ItemNumber)
+                .HasColumnName("item_Number")
+                .IsUnicode(false);
+
+                entity.Property(e => e.APISnapShotSummaryId)
+               .HasColumnName("x20APISnapShotSummaryID")
+               .IsUnicode(false);
+
+                entity.Property(e => e.CampaignStatus)
+                .HasColumnName("CampaignStatus")
+                .IsUnicode(false);
+
+               entity.Property(e => e.CName)
+              .HasColumnName("CName")
+              .IsUnicode(false);
+
 
             });
 

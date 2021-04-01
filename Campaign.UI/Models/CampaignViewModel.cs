@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Campaign.Data.Entities
+namespace Campaign.UI.Models
 {
-    [Table("tblItemJobs")]
-    public class Campaign
+    
+    public class CampaignViewModel
     {
 
         public long ItemJobsId { get; set; }

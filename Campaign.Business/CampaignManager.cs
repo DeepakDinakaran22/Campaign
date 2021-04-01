@@ -7,16 +7,9 @@ namespace Campaign.Business
 {
     public class CampaignManager : ICampaignManager
     {
-        private UnitOfWork unitOfWork;
-        public CampaignManager()
-        {
-            this.unitOfWork = new UnitOfWork();
-
-        }
-
         public List<Models.Campaign> GetAllRecords()
         {
-            var campaigns = unitOfWork.CampaignRepository.Get();
+            //var campaigns = unitOfWork.CampaignRepository.Get();
             return null;
         }
     }

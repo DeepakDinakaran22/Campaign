@@ -1,26 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Campaign.Business.Interfaces;
-using Campaign.UI.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Campaign.UI.Controllers
 {
+    using AutoMapper;
+    using Campaign.Business.Interfaces;
+    using Campaign.Data;
+    using Campaign.Data.Entities;
+    using Campaign.UI.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+    using System.Linq;
     public class CampaignController : Controller
     {
         private readonly ICampaignManager campaignManager = null;
+        private UnitOfWork unitOfWork = new UnitOfWork();
+
 
         public CampaignController(ICampaignManager campaignManager)
         {
             this.campaignManager = campaignManager;
         }
 
+        [HttpPost]
+        public void CreateCampaign(CampaignViewModel campaign)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CampaignViewModel, Campaign>();
+            });
+            IMapper iMapper = config.CreateMapper();
+            var destination = iMapper.Map<CampaignViewModel, Campaign>(campaign);
+            unitOfWork.CampaignRepository.Insert(destination);
+            unitOfWork.Save();
+        }
+
+        [HttpPost]
+        public void UpdateCampaign(CampaignViewModel campaign)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CampaignViewModel, Campaign>();
+            });
+            IMapper iMapper = config.CreateMapper();
+            var destination = iMapper.Map<CampaignViewModel, Campaign>(campaign);
+            unitOfWork.CampaignRepository.Update(destination);
+            unitOfWork.Save();
+        }
+
+        [HttpGet]
+        public Campaign GetCampaign(long campaignId)
+        {
+            return unitOfWork.CampaignRepository.GetByID(campaignId);
+        }
+
+        [HttpGet]
         public IActionResult List()
         {
-            //campaignManager.GetAllRecords();
+            var data = unitOfWork.CampaignRepository.Get().ToList();
             ViewBag.datasource = this.generateEvents();
 
             List<ResourceDataSourceModel> categories = new List<ResourceDataSourceModel>();

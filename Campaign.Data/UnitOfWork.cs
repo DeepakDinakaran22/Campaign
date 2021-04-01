@@ -1,6 +1,6 @@
 ﻿
 
-namespace Campaign.Business
+namespace Campaign.Data
 {
     using Campaign.Data;
     using System;
@@ -9,6 +9,7 @@ namespace Campaign.Business
     {
         private CampaignContext context = new CampaignContext();
         private GenericRepository<Campaign> campaignRepository;
+        private GenericRepository<Category> categoryRepository;
         public GenericRepository<Campaign> CampaignRepository
         {
             get
@@ -18,6 +19,17 @@ namespace Campaign.Business
                     this.campaignRepository = new GenericRepository<Campaign>(context);
                 }
                 return campaignRepository;
+            }
+        }
+        public GenericRepository<Category> CategoryRepository
+        {
+            get
+            {
+                if (this.campaignRepository == null)
+                {
+                    this.categoryRepository = new GenericRepository<Category>(context);
+                }
+                return categoryRepository;
             }
         }
         public void Save()

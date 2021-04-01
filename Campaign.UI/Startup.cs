@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Campaign.Business;
 using Campaign.Business.Interfaces;
+using Campaign.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +21,8 @@ namespace Campaign.UI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectionService.Set(configuration);
+
         }
 
         public IConfiguration Configuration { get; }
@@ -34,6 +38,7 @@ namespace Campaign.UI
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddDbContext<CampaignContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CampaignConnection")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
