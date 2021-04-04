@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Campaign</title>
+    <title>Campaigns - Pads4 Advertising Portal</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -15,34 +15,16 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <!--<link rel="stylesheet" href="~/css/dashlite.css">-->
 
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <!--<link rel="stylesheet" href="~/css/dashlite.css">-->
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+    <link rel="stylesheet" href="~/css/dashlite.css">
+    <link id="skin-default" rel="stylesheet" href="~/css/skins/theme-green.css">
+    <link rel="stylesheet" href="~/css/calender.css">
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Campaign</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <partial name="_CookieConsentPartial" />
+<body class="nk-body npc-apps apps-only has-apps-sidebar npc-apps-calendar bg-white">
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -65,12 +47,26 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    <script src="~/js/bundle.js"></script>
-    <script src="~/js/scripts.js"></script>
-
     <div class="container body-content">
         @RenderBody()
     </div>
+
+    <script src="~/js/bundle.js"></script>
     <ejs-scripts></ejs-scripts>
+
+    <script>
+        //$(window).on("load", function () {
+        //    $(".e-appointment").each(function () {
+        //        var left = parseInt($(this).css("left"), 10);
+        //        var width = parseInt($(this).css("width"), 10);
+        //        if (left > 0) {
+        //            var n = left / width;
+        //            var l = left - n;
+        //            $(this).css("left", l + "px");
+        //            $(this).css("width", "95px");
+        //        }
+        //    });
+        //});
+    </script>
 </body>
 </html>

@@ -57,7 +57,7 @@ namespace Campaign.UI.Controllers
         [HttpGet]
         public IActionResult List()
         {
-            var data = unitOfWork.CampaignRepository.Get().ToList();
+            //var data = unitOfWork.CampaignRepository.Get().ToList();
             ViewBag.datasource = this.generateEvents();
 
             List<ResourceDataSourceModel> categories = new List<ResourceDataSourceModel>();
@@ -84,13 +84,13 @@ namespace Campaign.UI.Controllers
             List<EventsData> dateCollections = new List<EventsData>();
             var names = new string[]
             { "Bering Sea Gold", "Technology", "Maintenance", "Meeting", "Travelling", "Annual Conference", "Birthday Celebration",
-            "Farewell Celebration", "Wedding Aniversary", "Alaska: The Last Frontier", "Deadest Catch", "Sports Day",
-            "MoonShiners", "Close Encounters", "HighWay Thru Hell", "Daily Planet", "Cash Cab", "Basketball Practice",
-            "Rugby Match", "Guitar Class", "Music Lessons", "Doctor checkup", "Brazil - Mexico", "Opening ceremony", "Final presentation"
+                "Farewell Celebration", "Wedding Aniversary", "Alaska: The Last Frontier", "Deadest Catch", "Sports Day",
+                "MoonShiners", "Close Encounters", "HighWay Thru Hell", "Daily Planet", "Cash Cab", "Basketball Practice",
+                "Rugby Match", "Guitar Class", "Music Lessons", "Doctor checkup", "Brazil - Mexico", "Opening ceremony", "Final presentation"
             };
             var colors = new string[] { "#ff8787", "#9775fa", "#748ffc", "#3bc9db", "#69db7c",
-           "#fdd835", "#748ffc", "#9775fa", "#df5286", "#7fa900",
-           "#fec200", "#5978ee", "#00bdae", "#ea80fc"};
+               "#fdd835", "#748ffc", "#9775fa", "#df5286", "#7fa900",
+               "#fec200", "#5978ee", "#00bdae", "#ea80fc"};
             DateTime YearStart = new DateTime(DateTime.Now.Year - 2, 1, 1);
             for (var index = 0; index < 5; index++)
             {
