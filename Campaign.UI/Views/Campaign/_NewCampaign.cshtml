@@ -30,7 +30,7 @@
                                             <div class="form-group">
                                                 <label class="form-label" for="event-title">Name</label>
                                                 <div class="form-control-wrap">
-                                                    <input type="text" class="form-control" id="event-title" required>
+                                                    <input type="text" class="form-control" id="event-name" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -38,7 +38,7 @@
                                             <div class="form-group">
                                                 <label class="form-label">Advertiser</label>
                                                 <div class="form-control-wrap">
-                                                    <input type="text" class="form-control" id="event-title" required>
+                                                    <input type="text" class="form-control" id="event-advertiser" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -49,20 +49,9 @@
                                             <div class="form-group">
                                                 <label class="form-label">Start Date & Time</label>
                                                 <div class="row gx-2">
-                                                    <div class="w-55">
+                                                    <div class="w-100">
                                                         <div class="form-control-wrap">
-                                                            <div class="form-icon form-icon-left">
-                                                                <em class="icon ni ni-calendar"></em>
-                                                            </div>
-                                                            <input type="text" id="event-start-date" class="form-control date-picker" data-date-format="yyyy-mm-dd" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-45">
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-icon form-icon-left">
-                                                                <em class="icon ni ni-clock"></em>
-                                                            </div>
-                                                            <input type="text" id="event-start-time" data-time-format="HH:mm:ss" class="form-control time-picker">
+                                                            <input id="event-start-date" class="e-field" type="text" name="StartTime" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -72,10 +61,10 @@
                                             <div class="form-group">
                                                 <label class="form-label">Occurrence</label>
                                                 <div class="form-control-wrap">
-                                                    <select id="event-theme" class="select-calendar-theme form-control form-control-lg">
-                                                        <option value="event-primary">Daily</option>
-                                                        <option value="event-success">In 2 days </option>
-                                                        <option value="event-info">In 3 days</option>
+                                                    <select id="event-occurrence" class="select-calendar-theme form-control form-control-lg">
+                                                        <option value="Daily">Daily</option>
+                                                        <option value="In 2 days">In 2 days</option>
+                                                        <option value="In 3 days">In 3 days</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -87,20 +76,9 @@
                                             <div class="form-group">
                                                 <label class="form-label">End Date & Time</label>
                                                 <div class="row gx-2">
-                                                    <div class="w-55">
+                                                    <div class="w-100">
                                                         <div class="form-control-wrap">
-                                                            <div class="form-icon form-icon-left">
-                                                                <em class="icon ni ni-calendar"></em>
-                                                            </div>
-                                                            <input type="text" id="event-end-date" class="form-control date-picker" data-date-format="yyyy-mm-dd">
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-45">
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-icon form-icon-left">
-                                                                <em class="icon ni ni-clock"></em>
-                                                            </div>
-                                                            <input type="text" id="event-end-time" data-time-format="HH:mm:ss" class="form-control time-picker">
+                                                            <input id="event-end-date" class="e-field" type="text" name="EndTime" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,11 +87,11 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label class="form-label">Status</label>
-                                                <div class="form-control-wrap">
-                                                    <select id="event-theme" class="select-calendar-theme form-control form-control-lg">
-                                                        <option value="event-primary">Started</option>
-                                                        <option value="event-success">Booked </option>
-                                                        <option value="event-info">Paused</option>
+                                                <div class="form-control-status">
+                                                    <select id="event-status" class="select-calendar-theme form-control form-control-lg">
+                                                        <option value="5">Added</option>
+                                                        <option value="2">Started </option>
+                                                        <option value="1">Approved</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -125,7 +103,7 @@
                                             <div class="form-group">
                                                 <label class="form-label">Contact Number</label>
                                                 <div class="form-control-wrap">
-                                                    <input type="text" class="form-control" id="event-title" required>
+                                                    <input type="text" class="form-control" id="event-contact" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,7 +114,7 @@
                                     <div class="row gy-4">
                                         <div class="col-1">
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button id="btnSave" type="button" class="btn btn-primary">Save</button>
                                             </div>
                                         </div>
                                         <div class="col-2">
@@ -411,3 +389,38 @@
         </div>
     </div>
 </div>
+
+<style>
+    .form-control:focus {
+        border-color: #ff5858 !important;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var startElement = document.querySelector('#event-start-date');
+        if (!startElement.classList.contains('e-datetimepicker')) {
+            new ej.calendars.DateTimePicker({ value: "" }, startElement);
+        }
+
+        var endElement = document.querySelector('#event-end-date');
+        if (!endElement.classList.contains('e-datetimepicker')) {
+            new ej.calendars.DateTimePicker({ value: "" }, endElement);
+        }
+
+        $("#btnSave").off("click").on("click", function () {
+            var campaign = {
+                CName: $("#event-advertiser").val(),
+                CampaignName: $("#event-name").val(),
+                ContactNumber: $("#event-contact").val(),
+                ItemStartDate: $("#event-start-date").val(),
+                ItemEndDate: $("#event-end-date").val(),
+                CampaignStatus: $("#event-status").val(),
+                Occurrence: $("#event-occurrence").val()
+            };
+            callAjax("POST", "Campaign/CreateCampaign", { campaign: campaign }, null, null, false);
+            $("#addEventPopup").modal("hide");
+            window.location.reload();
+        });
+    });
+</script>

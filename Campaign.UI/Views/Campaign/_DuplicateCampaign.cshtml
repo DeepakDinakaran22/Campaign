@@ -8,26 +8,44 @@
         </div>
         <div class="e-dlg-content" id="schedule_dialog_wrapper_dialog-content">
             <div class="e-form-container">
-                <form class="e-schedule-form e-lib e-formvalidator" id="scheduleEditForm" onsubmit="return false;" novalidate="" data-id="12">
+                <form class="e-schedule-form e-lib e-formvalidator" id="scheduleDuplicateForm" onsubmit="return false;" novalidate="" data-id="35">
                     <table class="custom-event-editor" width="100%" cellpadding="5">
                         <tbody>
+                            <tr style="display:none;">
+                                <td class="e-textlabel">Campaign Id</td>
+                                <td colspan="4"><input id="CampaignId" class="e-field e-input" type="text" value="" name="CampaignId" style="width: 100%"></td>
+                            </tr>
                             <tr>
-                                <td class="e-textlabel">Summary</td>
-                                <td colspan="4"><input id="Subject" class="e-field e-input" type="text" value="" name="Subject" style="width: 100%"></td>
+                                <td class="e-textlabel">Name</td>
+                                <td colspan="4"><input id="CampaignName" class="e-field e-input" type="text" value="" name="CampaignName" style="width: 100%"></td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">Advertiser</td>
+                                <td colspan="4"><input id="CName" name="CName" class="e-field e-input" type="text" style="width: 100%"></td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">Start Date & Time</td>
+                                <td colspan="4"><input id="ItemStartDate" class="e-field" type="text" name="ItemStartDate" /></td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">End Date & Time</td>
+                                <td colspan="4"><input id="ItemEndDate" class="e-field" type="text" name="ItemEndDate" /></td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">Occurrence</td>
+                                <td colspan="4">
+                                    <input id="Occurrence" class="e-field" type="text" name="Occurrence" />
+                                </td>
                             </tr>
                             <tr>
                                 <td class="e-textlabel">Status</td>
                                 <td colspan="4">
-                                    <input type="text" id="EventType" name="EventType" class="e-field" style="width: 100%" />
+                                    <input id="CampaignStatus" class="e-field" type="text" name="CampaignStatus" />
                                 </td>
                             </tr>
                             <tr>
-                                <td class="e-textlabel">From</td>
-                                <td colspan="4" class="tdStartTime"><input id="StartTime" class="e-field" type="text" name="StartTime" /></td>
-                            </tr>
-                            <tr>
-                                <td class="e-textlabel">To</td>
-                                <td colspan="4" class="tdEndTime"><input id="EndTime" class="e-field" type="text" name="EndTime" /></td>
+                                <td class="e-textlabel">Contact Number</td>
+                                <td colspan="4"><input id="ContactNumber" class="e-field e-input" type="text" name="ContactNumber" width="100%"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -35,22 +53,79 @@
             </div>
         </div>
         <div class="e-footer-content">
-        <button type="button" class="e-control e-btn e-lib e-primary e-event-save e-flat">Save</button>
+        <button type="button" class="e-control e-btn e-lib e-primary e-event-save e-flat e-duplicate-campaign-save">SAVE</button>
         <button type="button" class="e-control e-btn e-lib e-event-cancel e-flat e-duplicate-button-cancel">Cancel</button></div>
     </div>
     <div class="e-dlg-overlay" style="z-index: 1002; display: block; position: absolute;"></div>
 </div>
 
 <script>
+    function GetStatusText(code) {
+        debugger;
+        var text = "";
+        switch (Number(code)) {
+            case 1:
+                text = "Approved";
+                break;
+            case 2:
+                text = "Started";
+                break;
+            case 5:
+                text = "Approved";
+                break;
+        }
+        return text;
+    }
+
+    function GetStatusCode(text) {
+        var code = "";
+        switch (text) {
+            case "Approved":
+                code = "1";
+                break;
+            case "Started":
+                code = "2";
+                break;
+            case "Approved":
+                code = "5";
+                break;
+        }
+        return code;
+    }
+
     function initDuplicateDate(data) {
-        var startElement = document.querySelector('#StartTime');
+        $("#CampaignName").val(data.CampaignName + " - 1");
+        $("#CName").val(data.CName);
+        $("#ContactNumber").val(data.ContactNumber);
+
+        var startElement = document.querySelector('#ItemStartDate');
         if (!startElement.classList.contains('e-datetimepicker')) {
-            new ej.calendars.DateTimePicker({ value: new Date(data.StartTime) || new Date() }, startElement);
+            new ej.calendars.DateTimePicker({ value: new Date(data.ItemStartDate) || new Date() }, startElement);
         }
 
-        var endElement = document.querySelector('#EndTime');
+        var endElement = document.querySelector('#ItemEndDate');
         if (!endElement.classList.contains('e-datetimepicker')) {
-            new ej.calendars.DateTimePicker({ value: new Date(data.EndTime) || new Date() }, endElement);
+            new ej.calendars.DateTimePicker({ value: new Date(data.ItemEndDate) || new Date() }, endElement);
+        }
+
+        var statusElement = document.querySelector('#CampaignStatus');
+        if (!statusElement.classList.contains('e-dropdownlist')) {
+            var dropDownListObject = new ej.dropdowns.DropDownList({
+                placeholder: 'Choose status', value: GetStatusText(data.CampaignStatus),
+                dataSource: ['Added', 'Started', 'Approved']
+            });
+            dropDownListObject.appendTo(statusElement);
+            statusElement.setAttribute('name', 'CampaignStatus');
+        }
+
+        var occElement = document.querySelector('#Occurrence');
+        if (!occElement.classList.contains('e-dropdownlist')) {
+            var dropDownListObject = new ej.dropdowns.DropDownList({
+                placeholder: 'Choose status', value: data.Occurrence,
+                dataSource: ['Daily', 'In 2 days', 'In 3 days']
+            });
+            dropDownListObject.appendTo(occElement);
+            occElement.setAttribute('name', 'Occurrence');
         }
 
         $(".e-duplicate-button-cancel, .e-dlg-closeicon-btn").off("click").on("click", function () {
@@ -58,6 +133,26 @@
             $(".e-duplicate-campaign-dialog .e-dlg-duplicate, .e-quick-popup-wrapper").removeClass("e-popup-open").addClass("e-popup-close");
             $(".tdStartTime").html($("<input />").attr({ class: "e-field", type: "text", name:"StartTime", id:"StartTime"}));
             $(".tdEndTime").html($("<input />").attr({ class: "e-field", type: "text", name: "EndTime", id:"EndTime" }));
+        });
+
+        $(".e-duplicate-campaign-save").off("click").on("click", function () {
+            var campaign = {
+                CName: $("#CName").val(),
+                CampaignName: $("#CampaignName").val(),
+                ContactNumber: $("#ContactNumber").val(),
+                ItemStartDate: $("#ItemStartDate").val(),
+                ItemEndDate: $("#ItemEndDate").val(),
+                CampaignStatus: GetStatusCode($("#CampaignStatus").val()),
+                Occurrence: $("#Occurrence").val()
+            };
+            callAjax("POST", "Campaign/CreateCampaign", { campaign: campaign }, null, null, false);
+
+            $(".e-duplicate-campaign-dialog").css("display", "none");
+            $(".e-duplicate-campaign-dialog .e-dlg-duplicate, .e-quick-popup-wrapper").removeClass("e-popup-open").addClass("e-popup-close");
+            $(".tdStartTime").html($("<input />").attr({ class: "e-field", type: "text", name: "StartTime", id: "StartTime" }));
+            $(".tdEndTime").html($("<input />").attr({ class: "e-field", type: "text", name: "EndTime", id: "EndTime" }));
+
+            window.location.reload();
         });
     }
 </script>

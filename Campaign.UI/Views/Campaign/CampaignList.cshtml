@@ -334,34 +334,62 @@
                                             <e-schedule-resource dataSource="@ViewBag.Categories" field="TaskId" title="Category" name="Categories" textField="text" idField="id" groupIDField='groupId' colorField="color" allowMultiple="true"></e-schedule-resource>
                                         </e-schedule-resources>
                                         <e-schedule-eventsettings dataSource="@ViewBag.datasource">
+                                            <e-eventsettings-fields id="ItemJobsId">
+                                                <e-field-subject name="CampaignName"></e-field-subject>
+                                                <e-field-starttime name="ItemStartDate"></e-field-starttime>
+                                                <e-field-endtime name="ItemEndDate"></e-field-endtime>
+                                            </e-eventsettings-fields>
                                         </e-schedule-eventsettings>
                                     </ejs-schedule>
                                     <script id="EventEditorTemplate" type="text/template">
                                         <table class="custom-event-editor" width="100%" cellpadding="5">
                                             <tbody>
-                                                <tr>
-                                                    <td class="e-textlabel">Summary</td>
+                                                <tr style="display:none;">
+                                                    <td class="e-textlabel">Campaign Id</td>
                                                     <td colspan="4">
-                                                        <input id="Subject" class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
+                                                        <input id="CampaignId" class="e-field e-input" type="text" value="" name="CampaignId" style="width: 100%" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="e-textlabel">Name</td>
+                                                    <td colspan="4">
+                                                        <input id="CampaignName" class="e-field e-input" type="text" value="" name="CampaignName" style="width: 100%" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="e-textlabel">Advertiser</td>
+                                                    <td colspan="4">
+                                                        <input id="CName" name="CName" class="e-field e-input" type="text" style="width: 100%" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="e-textlabel">Start Date & Time</td>
+                                                    <td colspan="4">
+                                                        <input id="ItemStartDate" class="e-field" type="text" name="ItemStartDate" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="e-textlabel">End Date & Time</td>
+                                                    <td colspan="4">
+                                                        <input id="ItemEndDate" class="e-field" type="text" name="ItemEndDate" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="e-textlabel">Occurrence</td>
+                                                    <td colspan="4">
+                                                        <input id="Occurrence" class="e-field" type="text" name="Occurrence" />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="e-textlabel">Status</td>
                                                     <td colspan="4">
-                                                        <input type="text" id="EventType" name="EventType" class="e-field" style="width: 100%" />
+                                                        <input id="CampaignStatus" class="e-field" type="text" name="CampaignStatus" />
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="e-textlabel">From</td>
+                                                    <td class="e-textlabel">Contact Number</td>
                                                     <td colspan="4">
-                                                        <input id="StartTime" class="e-field" type="text" name="StartTime" />
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="e-textlabel">To</td>
-                                                    <td colspan="4">
-                                                        <input id="EndTime" class="e-field" type="text" name="EndTime" />
+                                                        <input id="ContactNumber" class="e-field e-input" type="text" name="ContactNumber" width="100%" />
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -369,34 +397,51 @@
 
                                     </script>
                                     <script type="text/javascript">
+                                        window.appUrl = '@ViewBag.ApplicationUrl';
                                         function onPopupOpen(args) {
+                                            debugger;
                                             if (args.type === 'Editor') {
                                                 $(args.element).find('.e-title-text').text("Edit Campaign");
                                                 $(args.element).find('.e-event-delete').css("display", "none");
 
-                                                var statusElement = args.element.querySelector('#EventType');
-                                                if (!statusElement.classList.contains('e-dropdownlist')) {
-                                                    var dropDownListObject = new ej.dropdowns.DropDownList({
-                                                        placeholder: 'Choose status', value: statusElement.value,
-                                                        dataSource: ['New', 'Requested', 'Confirmed']
-                                                    });
-                                                    dropDownListObject.appendTo(statusElement);
-                                                    statusElement.setAttribute('name', 'EventType');
+                                                $(args.element).find('.e-event-save').hide();
+                                                if ($(".e-save-campaign").length == 0) {
+                                                    var btnSave = $('<button>SAVE</button>').attr({ type: 'button', class: 'e-save-campaign e-control e-btn e-lib e-primary e-flat' });
+                                                    $(args.element).find(".e-event-save").after(btnSave);
                                                 }
 
-                                                var startElement = args.element.querySelector('#StartTime');
+                                                $("#CampaignId").val(args.data.ItemJobsId);
+                                                var statusElement = args.element.querySelector('#CampaignStatus');
+                                                if (!statusElement.classList.contains('e-dropdownlist')) {
+                                                    var dropDownListObject = new ej.dropdowns.DropDownList({
+                                                        placeholder: 'Choose status', value: GetStatusText(statusElement.value),
+                                                        dataSource: ['Added', 'Started', 'Approved']
+                                                    });
+                                                    dropDownListObject.appendTo(statusElement);
+                                                    statusElement.setAttribute('name', 'CampaignStatus');
+                                                }
+
+                                                var occElement = args.element.querySelector('#Occurrence');
+                                                if (!occElement.classList.contains('e-dropdownlist')) {
+                                                    var dropDownListObject = new ej.dropdowns.DropDownList({
+                                                        placeholder: 'Choose status', value: occElement.value,
+                                                        dataSource: ['Daily', 'In 2 days', 'In 3 days']
+                                                    });
+                                                    dropDownListObject.appendTo(occElement);
+                                                    occElement.setAttribute('name', 'Occurrence');
+                                                }
+
+                                                var startElement = args.element.querySelector('#ItemStartDate');
                                                 if (!startElement.classList.contains('e-datetimepicker')) {
                                                     new ej.calendars.DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
                                                 }
 
-                                                var endElement = args.element.querySelector('#EndTime');
+                                                var endElement = args.element.querySelector('#ItemEndDate');
                                                 if (!endElement.classList.contains('e-datetimepicker')) {
                                                     new ej.calendars.DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
                                                 }
 
-                                                $(args.element).find(".e-event-save").off("click").on("click", function () {
-                                                    console.log("hello world!!!");
-                                                });
+                                                
                                             }
                                             else if (args.type === 'QuickInfo') {
                                                 sessionStorage.setItem("selectedCampaign", JSON.stringify(args.data));
@@ -412,6 +457,55 @@
                                             initDuplicateDate(data);
                                             $(".e-duplicate-campaign-dialog").css("display", "flex");
                                             $(".e-duplicate-campaign-dialog .e-dlg-duplicate").removeClass("e-popup-close").addClass("e-popup-open");
+                                        });
+
+                                        function GetStatusText(code) {
+                                            var text = "";
+                                            switch (Number(code)) {
+                                                case 1:
+                                                    text = "Approved";
+                                                    break;
+                                                case 2:
+                                                    text = "Started";
+                                                    break;
+                                                case 5:
+                                                    text = "Approved";
+                                                    break;
+                                            }
+                                            return text;
+                                        }
+
+                                        function GetStatusCode(text) {
+                                            var code = "";
+                                            switch (text) {
+                                                case "Approved":
+                                                    code = "1";
+                                                    break;
+                                                case "Started":
+                                                    code = "2";
+                                                    break;
+                                                case "Approved":
+                                                    code = "5";
+                                                    break;
+                                            }
+                                            return code;
+                                        }
+
+                                        $(document).off("click", ".e-save-campaign").on("click", ".e-save-campaign", function () {
+                                            var campaign = {
+                                                ItemJobsId: $("#CampaignId").val(),
+                                                CName: $("#CName").val(),
+                                                CampaignName: $("#CampaignName").val(),
+                                                ContactNumber: $("#ContactNumber").val(),
+                                                ItemStartDate: $("#ItemStartDate").val(),
+                                                ItemEndDate: $("#ItemEndDate").val(),
+                                                CampaignStatus: GetStatusCode($("#CampaignStatus").val()),
+                                                Occurrence: $("#Occurrence").val()
+                                            };
+                                            callAjax("POST", "Campaign/UpdateCampaign", { campaign: campaign }, null, null, false);
+                                            $(".e-schedule-dialog-container").css("display", "none");
+                                            $(".e-schedule-dialog-container .e-schedule-dialog").removeClass("e-popup-open").addClass("e-popup-close");
+                                            window.location.reload();
                                         });
                                     </script>
 

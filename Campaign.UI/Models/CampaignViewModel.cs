@@ -93,5 +93,7 @@ namespace Campaign.UI.Models
         public long? CampaignStatus { get; set; }
 
         public bool? Status { get; set; }
+
+        public int TaskId { get; set; }
     }
 }
