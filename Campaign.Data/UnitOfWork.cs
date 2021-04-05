@@ -10,6 +10,8 @@ namespace Campaign.Data
         private CampaignContext context = new CampaignContext();
         private GenericRepository<Campaign> campaignRepository;
         private GenericRepository<Category> categoryRepository;
+
+        private GenericRepository<Network> networkRepository;
         public GenericRepository<Campaign> CampaignRepository
         {
             get
@@ -25,11 +27,23 @@ namespace Campaign.Data
         {
             get
             {
-                if (this.campaignRepository == null)
+                if (this.categoryRepository == null)
                 {
                     this.categoryRepository = new GenericRepository<Category>(context);
                 }
                 return categoryRepository;
+            }
+        }
+
+        public GenericRepository<Network> NetworkRepository
+        {
+            get
+            {
+                if (this.networkRepository == null)
+                {
+                    this.networkRepository = new GenericRepository<Network>(context);
+                }
+                return networkRepository;
             }
         }
         public void Save()
