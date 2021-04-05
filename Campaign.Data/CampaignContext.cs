@@ -76,9 +76,9 @@ namespace Campaign.Data
                 .HasColumnName("CampaignStatus")
                 .IsUnicode(false);
 
-               entity.Property(e => e.CName)
-              .HasColumnName("CName")
-              .IsUnicode(false);
+                entity.Property(e => e.CName)
+               .HasColumnName("CName")
+               .IsUnicode(false);
 
                 entity.Property(e => e.DateModified)
                 .HasColumnName("DateModified")
@@ -151,6 +151,21 @@ namespace Campaign.Data
 
                 entity.Property(e => e.Status)
                 .HasColumnName("Status");
+            });
+
+            modelBuilder.Entity<Network>(entity =>
+            {
+                entity.HasKey(e => e.NetworkId);
+
+                entity.Property(e => e.NetworkId)
+                .HasColumnName("NetworkId");
+
+                entity.Property(e => e.Level)
+                .HasColumnName("Level");
+
+                entity.Property(e => e.NetworkName)
+                .HasColumnName("NetworkName");
+
             });
         }
     }
