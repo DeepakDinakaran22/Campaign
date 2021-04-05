@@ -207,7 +207,9 @@ pre code { font-size: inherit; color: inherit; word-break: normal; }
 
 .pre-scrollable { max-height: 340px; overflow-y: scroll; }
 
+/*
 .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl { width: 100%; padding-right: 14px; padding-left: 14px; margin-right: auto; margin-left: auto; }
+    */
 
 @media (min-width: 576px) { .container, .container-sm { max-width: 540px; } }
 

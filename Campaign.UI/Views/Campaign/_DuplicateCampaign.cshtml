@@ -1,0 +1,63 @@
+﻿<div class="e-dlg-container e-dlg-center-center e-schedule-dialog-container e-duplicate-campaign-dialog" style="z-index: 1003; display: none; position: fixed;">
+    <div id="schedule_dialog_wrapper" class="e-lib e-dialog e-control e-schedule-dialog e-dlg-modal e-dlg-duplicate e-popup e-popup-open" role="dialog" style="max-height: 801px; z-index: 1003; width: 500px; left: 0px; top: 0px; min-height: 300px; position: relative;" aria-labelledby="schedule_dialog_wrapper_title" aria-describedby="schedule_dialog_wrapper_dialog-content" aria-modal="true" tabindex="-1">
+        <div class="e-dlg-header-content" id="schedule_dialog_wrapper_dialog-header">
+            <button class="e-dlg-closeicon-btn e-control e-btn e-lib e-flat e-icon-btn" type="button" title="Close" aria-label="Close"><span class="e-btn-icon e-icon-dlg-close e-icons"></span></button>
+            <div class="e-dlg-header" id="schedule_dialog_wrapper_title">
+                <div class="e-title-text">Duplicate Campaign</div>
+            </div>
+        </div>
+        <div class="e-dlg-content" id="schedule_dialog_wrapper_dialog-content">
+            <div class="e-form-container">
+                <form class="e-schedule-form e-lib e-formvalidator" id="scheduleEditForm" onsubmit="return false;" novalidate="" data-id="12">
+                    <table class="custom-event-editor" width="100%" cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td class="e-textlabel">Summary</td>
+                                <td colspan="4"><input id="Subject" class="e-field e-input" type="text" value="" name="Subject" style="width: 100%"></td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">Status</td>
+                                <td colspan="4">
+                                    <input type="text" id="EventType" name="EventType" class="e-field" style="width: 100%" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">From</td>
+                                <td colspan="4" class="tdStartTime"><input id="StartTime" class="e-field" type="text" name="StartTime" /></td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">To</td>
+                                <td colspan="4" class="tdEndTime"><input id="EndTime" class="e-field" type="text" name="EndTime" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="e-footer-content">
+        <button type="button" class="e-control e-btn e-lib e-primary e-event-save e-flat">Save</button>
+        <button type="button" class="e-control e-btn e-lib e-event-cancel e-flat e-duplicate-button-cancel">Cancel</button></div>
+    </div>
+    <div class="e-dlg-overlay" style="z-index: 1002; display: block; position: absolute;"></div>
+</div>
+
+<script>
+    function initDuplicateDate(data) {
+        var startElement = document.querySelector('#StartTime');
+        if (!startElement.classList.contains('e-datetimepicker')) {
+            new ej.calendars.DateTimePicker({ value: new Date(data.StartTime) || new Date() }, startElement);
+        }
+
+        var endElement = document.querySelector('#EndTime');
+        if (!endElement.classList.contains('e-datetimepicker')) {
+            new ej.calendars.DateTimePicker({ value: new Date(data.EndTime) || new Date() }, endElement);
+        }
+
+        $(".e-duplicate-button-cancel, .e-dlg-closeicon-btn").off("click").on("click", function () {
+            $(".e-duplicate-campaign-dialog").css("display", "none");
+            $(".e-duplicate-campaign-dialog .e-dlg-duplicate, .e-quick-popup-wrapper").removeClass("e-popup-open").addClass("e-popup-close");
+            $(".tdStartTime").html($("<input />").attr({ class: "e-field", type: "text", name:"StartTime", id:"StartTime"}));
+            $(".tdEndTime").html($("<input />").attr({ class: "e-field", type: "text", name: "EndTime", id:"EndTime" }));
+        });
+    }
+</script>

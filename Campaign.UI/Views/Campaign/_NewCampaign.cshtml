@@ -1,0 +1,413 @@
+﻿
+<div class="modal fade" tabindex="-1" id="addEventPopup">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Campaign</h5>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <em class="icon ni ni-cross"></em>
+                </a>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs mt-n3">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tabItem9"><em class="icon ni ni-calendar-booking"></em><span>Campaign</span> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tabItem10"><em class="icon ni ni-folder-plus"></em><span>Assets</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tabItem11"><em class="icon ni ni-play-circle"></em><span> Players</span></a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tabItem9">
+                        <div class="card card-preview">
+                            <div class="card-inner">
+                                <form class="form-validate is-alter" novalidate="novalidate">
+                                    <div class="row gy-4">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="event-title">Name</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="event-title" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Advertiser</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="event-title" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row gy-4">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Start Date & Time</label>
+                                                <div class="row gx-2">
+                                                    <div class="w-55">
+                                                        <div class="form-control-wrap">
+                                                            <div class="form-icon form-icon-left">
+                                                                <em class="icon ni ni-calendar"></em>
+                                                            </div>
+                                                            <input type="text" id="event-start-date" class="form-control date-picker" data-date-format="yyyy-mm-dd" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-45">
+                                                        <div class="form-control-wrap">
+                                                            <div class="form-icon form-icon-left">
+                                                                <em class="icon ni ni-clock"></em>
+                                                            </div>
+                                                            <input type="text" id="event-start-time" data-time-format="HH:mm:ss" class="form-control time-picker">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Occurrence</label>
+                                                <div class="form-control-wrap">
+                                                    <select id="event-theme" class="select-calendar-theme form-control form-control-lg">
+                                                        <option value="event-primary">Daily</option>
+                                                        <option value="event-success">In 2 days </option>
+                                                        <option value="event-info">In 3 days</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row gy-4">
+
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">End Date & Time</label>
+                                                <div class="row gx-2">
+                                                    <div class="w-55">
+                                                        <div class="form-control-wrap">
+                                                            <div class="form-icon form-icon-left">
+                                                                <em class="icon ni ni-calendar"></em>
+                                                            </div>
+                                                            <input type="text" id="event-end-date" class="form-control date-picker" data-date-format="yyyy-mm-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-45">
+                                                        <div class="form-control-wrap">
+                                                            <div class="form-icon form-icon-left">
+                                                                <em class="icon ni ni-clock"></em>
+                                                            </div>
+                                                            <input type="text" id="event-end-time" data-time-format="HH:mm:ss" class="form-control time-picker">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Status</label>
+                                                <div class="form-control-wrap">
+                                                    <select id="event-theme" class="select-calendar-theme form-control form-control-lg">
+                                                        <option value="event-primary">Started</option>
+                                                        <option value="event-success">Booked </option>
+                                                        <option value="event-info">Paused</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row gy-4">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Contact Number</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="event-title" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row gy-4">
+                                        <div class="col-1">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <button id="resetEvent" data-dismiss="modal" class="btn btn-danger btn-dim">Discard</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--     </div> -->
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tabItem10">
+
+                        <div class="card card-preview">
+                            <div class="card-inner">
+                                <div class="nk-block-head-content">
+                                    <a href="#" class="btn btn-primary" data-target="#addEventPopup"><em class="icon ni ni-plus"></em><span>Add New</span></a>
+                                    <a href="#" class="btn btn-dim btn-outline-primary">Duplicate</a>
+                                </div><!-- .nk-block-head-content -->
+                                <br />
+                                <div class="card card-bordered card-preview">
+                                    <table class="table table-tranx">
+                                        <thead>
+                                            <tr class="nk-tb-item nk-tb-head">
+                                                <th class="nk-tb-col nk-tb-col-check sorting_asc" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending">
+                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input type="checkbox" class="custom-control-input" id="uid">
+                                                        <label class="custom-control-label" for="uid"></label>
+                                                    </div>
+                                                </th>
+                                                <th class="nk-tb-col tb-col-mb"><span class="sub-text">#</span></th>
+                                                <th class="nk-tb-col"><span class="sub-text">Thumbnail</span></th>
+                                                <th class="nk-tb-col tb-col-mb"><span class="sub-text">Label</span></th>
+                                                <th class="nk-tb-col tb-col-md"><span class="sub-text">Duration(Sec)</span></th>
+                                                <th class="nk-tb-col tb-col-lg"><span class="sub-text">Reccurrence</span></th>
+                                                <th class="nk-tb-col tb-col-lg"><span class="sub-text">From</span></th>
+                                                <th class="nk-tb-col tb-col-md"><span class="sub-text">To</span></th>
+                                                <th class="nk-tb-col tb-col-md"><span class="sub-text">Frequency</span></th>
+                                                <th class="nk-tb-col nk-tb-col-tools text-right">
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="nk-tb-item">
+                                                <td class="nk-tb-col nk-tb-col-check">
+                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input type="checkbox" class="custom-control-input" id="uid1">
+                                                        <label class="custom-control-label" for="uid1"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col">
+                                                    1
+                                                </td>
+                                                <td class="nk-tb-col">
+                                                    <img width="70" src="./images/ad1.jpg" />
+                                                </td>
+                                                <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                                    <span class="tb-amount">DIRE-EMGDM-Samsung - EFDVGFF</span>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-md">
+                                                    <span>15.00</span>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
+                                                    <!--<ul class="list-status">
+                                                        <li><em class="icon text-success ni ni-check-circle"></em> <span>Email</span></li>
+                                                        <li><em class="icon ni ni-alert-circle"></em> <span>KYC</span></li>
+                                                    </ul>-->
+                                                    <div class="form-control-wrap ">
+                                                        <div class="form-control-select">
+                                                            <select class="form-control" id="default-06">
+                                                                <option value="default_option">Daily</option>
+                                                                <option value="option_select_name">In 2 days</option>
+                                                                <option value="option_select_name">In 3 days</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-lg">
+                                                    <!--<span>05 Oct 2019</span>-->
+                                                    <div class="form-group">
+                                                        <div class="form-control-wrap has-timepicker">
+                                                            <div class="form-icon form-icon-right">
+                                                                <em class="icon ni ni-clock"></em>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-xl form-control-outlined time-picker" id="outlined-time-picker">
+                                                            <!--<label class="form-label-outlined" for="outlined-time-picker">Time Picker</label>-->
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-md">
+                                                    <div class="form-group">
+                                                        <div class="form-control-wrap has-timepicker">
+                                                            <div class="form-icon form-icon-right">
+                                                                <em class="icon ni ni-clock"></em>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-xl form-control-outlined time-picker" id="outlined-time-picker">
+                                                            <!--<label class="form-label-outlined" for="outlined-time-picker">Time Picker</label>-->
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col nk-tb-col-tools">
+                                                    <span> 4</span>
+                                                </td>
+                                                <td>
+                                                    <span href="#" class="icon ni ni-trash"></span>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="nk-tb-item">
+                                                <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input type="checkbox" class="custom-control-input" id="uid2">
+                                                        <label class="custom-control-label" for="uid2"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col">
+                                                    2
+                                                </td>
+                                                <td class="nk-tb-col">
+                                                    <!--<div class="user-card">
+                                                        <div class="user-avatar bg-success d-none d-sm-flex">
+                                                            <span>AL</span>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <span class="tb-lead">Ashley Lawson <span class="dot dot-warning d-md-none ml-1"></span></span>
+                                                            <span>ashley@softnio.com</span>
+                                                        </div>
+                                                    </div>-->
+                                                    <img width="70" src="./images/ad2.png" />
+                                                </td>
+                                                <td class="nk-tb-col tb-col-mb" data-order="580.00">
+                                                    <span class="tb-amount">DIRE-EMGDM-Samsung EFDVGFF</span>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-md">
+                                                    <span>15.00</span>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Submited">
+                                                    <!--<ul class="list-status">
+                                                        <li><em class="icon text-success ni ni-check-circle"></em> <span>Email</span></li>
+                                                        <li><em class="icon text-info ni ni-alert-circle"></em> <span>KYC</span></li>
+                                                    </ul>-->
+                                                    <div class="form-control-wrap ">
+                                                        <div class="form-control-select">
+                                                            <select class="form-control" id="default-06">
+                                                                <option value="default_option">Daily</option>
+                                                                <option value="option_select_name">In 2 days</option>
+                                                                <option value="option_select_name">In 3 days</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-lg">
+                                                    <!--<span>07 Feb 2020</span>-->
+                                                    <div class="form-group">
+                                                        <div class="form-control-wrap has-timepicker">
+                                                            <div class="form-icon form-icon-right">
+                                                                <em class="icon ni ni-clock"></em>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-xl form-control-outlined time-picker" id="outlined-time-picker">
+                                                            <!--<label class="form-label-outlined" for="outlined-time-picker">Time Picker</label>-->
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col tb-col-md">
+                                                    <div class="form-group">
+                                                        <div class="form-control-wrap has-timepicker">
+                                                            <div class="form-icon form-icon-right">
+                                                                <em class="icon ni ni-clock"></em>
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-xl form-control-outlined time-picker" id="outlined-time-picker">
+                                                            <!--<label class="form-label-outlined" for="outlined-time-picker">Time Picker</label>-->
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="nk-tb-col nk-tb-col-tools">
+                                                    4
+
+                                                </td>
+                                                <td>
+                                                    <span href="#" class="icon ni ni-trash"></span>
+                                                </td>
+                                            </tr><!-- .nk-tb-item  -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div><!-- .card-preview -->
+                    </div>
+                    <div class="tab-pane" id="tabItem11">
+                        <p>
+                            <div class="card card-bordered card-preview">
+                                <table class="table table-tranx">
+                                    <thead>
+                                        <tr class="tb-tnx-head">
+                                            <th class="tb-tnx-id"><span class="">#</span></th>
+                                            <th class="tb-tnx-info">
+                                                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                                                    <span>Name</span>
+                                                </span>
+                                            </th>
+                                            <th class="tb-tnx-amount is-alt">
+                                                <span class="tb-tnx-status d-none d-md-inline-block">Status</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="tb-tnx-item">
+                                            <td class="tb-tnx-id">
+                                                <a href="#"><span>1</span></a>
+                                            </td>
+                                            <td class="tb-tnx-info">
+                                                <div class="tb-tnx-desc">
+                                                    <span class="title">DIREF</span>
+                                                </div>
+                                            </td>
+                                            <td class="tb-tnx-amount is-alt">
+                                                <div class="tb-tnx-status"><span class="badge badge-dot badge-success">Online</span></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="tb-tnx-item">
+                                            <td class="tb-tnx-id">
+                                                <a href="#"><span>2</span></a>
+                                            </td>
+                                            <td class="tb-tnx-info">
+                                                <div class="tb-tnx-desc">
+                                                    <span class="title">LIBR</span>
+                                                </div>
+                                            </td>
+                                            <td class="tb-tnx-amount is-alt">
+                                                <div class="tb-tnx-status"><span class="badge badge-dot badge-success">Online</span></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="tb-tnx-item">
+                                            <td class="tb-tnx-id">
+                                                <a href="#"><span>3</span></a>
+                                            </td>
+                                            <td class="tb-tnx-info">
+                                                <div class="tb-tnx-desc">
+                                                    <span class="title">LIJOS</span>
+                                                </div>
+                                            </td>
+                                            <td class="tb-tnx-amount is-alt">
+                                                <div class="tb-tnx-status"><span class="badge badge-dot badge-success">Online</span></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="tb-tnx-item">
+                                            <td class="tb-tnx-id">
+                                                <a href="#"><span>4</span></a>
+                                            </td>
+                                            <td class="tb-tnx-info">
+                                                <div class="tb-tnx-desc">
+                                                    <span class="title">LBHY</span>
+                                                </div>
+                                            </td>
+                                            <td class="tb-tnx-amount is-alt">
+                                                <div class="tb-tnx-status"><span class="badge badge-dot badge-success">Online</span></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

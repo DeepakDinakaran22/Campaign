@@ -1,0 +1,107 @@
+﻿
+.custom-event-editor .e-textlabel {
+    padding-right: 15px;
+    text-align: right;
+}
+
+.custom-event-editor td {
+    padding: 7px;
+    padding-right: 16px;
+}
+
+.e-schedule .e-vertical-view .e-content-wrap .e-appointment,
+.e-schedule .e-timeline-view .e-content-wrap .e-appointment {
+    border-radius: 8px;
+}
+
+.e-schedule .e-vertical-view .e-content-wrap .e-appointment .e-appointment-details {
+    padding: 0;
+    height: 100%;
+}
+
+.e-schedule .template-wrap {
+    height: 100%;
+    white-space: normal;
+}
+
+.e-schedule .template-wrap .image {
+    padding: 8px 0 4px;
+}
+
+.e-schedule .template-wrap .image img {
+    height: 100%;
+    width: 100%;
+    padding: 10px 25%;
+}
+
+.e-schedule .template-wrap .subject {
+    font-weight: 600;
+    font-size: 15px;
+    padding: 4px 4px 4px;
+    height: 25px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.e-schedule .template-wrap .time {
+    height: 50px;
+}
+
+.e-schedule .template-wrap .time,
+.e-schedule .template-wrap .description {
+    font-size: 12px;
+    padding: 4px 6px 4px;
+    overflow: hidden;
+}
+
+.e-schedule .template-wrap .footer {
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+}
+
+.e-schedule .e-timeline-view .e-appointment .e-appointment-details {
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.e-schedule .e-timeline-view .template-wrap {
+    width: 100%;
+}
+
+.e-schedule .e-timeline-view .template-wrap .subject {
+    font-size: 16px;
+    height: 36px;
+    text-align: center;
+}
+
+.e-duplicate {
+    color: #fff !important;
+}
+
+.e-btn.e-flat:hover, .e-btn.e-flat:focus {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.e-quick-popup-wrapper .e-copy-icon::before {
+    content: '\e33d';
+}
+
+.e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-copy-icon {
+    font-size: 12px;
+}
+
+.e-quick-popup-wrapper.e-device .e-multiple-event-popup .e-popup-header .e-copy-icon {
+    font-size: 14px;
+}
+
+.e-bigger .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-copy-icon {
+    font-size: 14px;
+}
+
+.e-bigger .e-quick-popup-wrapper.e-device .e-event-popup .e-popup-header .e-header-icon-wrapper .e-copy-icon {
+    font-size: 14px;
+}
