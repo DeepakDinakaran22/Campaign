@@ -80,6 +80,22 @@ namespace Campaign.Data
               .HasColumnName("CName")
               .IsUnicode(false);
 
+                entity.Property(e => e.DateModified)
+                .HasColumnName("DateModified")
+                .IsUnicode(false);
+
+                entity.Property(e => e.ContactNumber)
+            .HasColumnName("ContactNumber")
+            .IsUnicode(false);
+
+                entity.Property(e => e.Occurrence)
+            .HasColumnName("Occurrence")
+            .IsUnicode(false);
+
+                entity.Property(e => e.CampaignName)
+            .HasColumnName("CampaignName")
+            .IsUnicode(false);
+
 
             });
 

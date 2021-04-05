@@ -13,6 +13,11 @@ namespace Campaign.Data.Entities
 
         public long? JobsId { get; set; }
 
+        public string CampaignName { get; set; }
+
+        public string Occurrence { get; set; }
+        public string ContactNumber { get; set; }
+
         public string DailyHourlyAvailId { get; set; }
 
         public string AgreeId { get; set; }

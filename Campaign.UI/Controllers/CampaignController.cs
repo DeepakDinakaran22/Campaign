@@ -25,6 +25,17 @@ namespace Campaign.UI.Controllers
         [HttpPost]
         public void CreateCampaign(CampaignViewModel campaign)
         {
+            // For testing after binding ui please remove
+            //campaign.CName = "Test";
+            //campaign.CampaignName = "Test";
+            //campaign.ContactNumber = "123456789";
+            //campaign.Occurrence = "daiy";
+            //campaign.ItemStartDate = DateTime.Now;
+            //campaign.ItemEndDate = DateTime.Now;
+
+            campaign.DateModified = DateTime.Now;
+            campaign.CatgoryId = unitOfWork.CategoryRepository.Get().Where(x => x.CategoryName == "FOC").FirstOrDefault().CategoryID;
+
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CampaignViewModel, Campaign>();
@@ -57,8 +68,10 @@ namespace Campaign.UI.Controllers
         [HttpGet]
         public IActionResult List()
         {
-            //var data = unitOfWork.CampaignRepository.Get().ToList();
+            var data = unitOfWork.CampaignRepository.Get().ToList();
+            CreateCampaign(new CampaignViewModel());
             ViewBag.datasource = this.generateEvents();
+            //UpdateCampaign(new CampaignViewModel());
 
             List<ResourceDataSourceModel> categories = new List<ResourceDataSourceModel>();
             categories.Add(new ResourceDataSourceModel { text = "Started", id = 1, groupId = 1, color = "#df5286" });
