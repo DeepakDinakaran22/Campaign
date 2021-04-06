@@ -16,7 +16,7 @@ namespace Campaign.UI.Controllers
         private readonly ICampaignManager campaignManager = null;
         private readonly IMapper mapper = null;
         private UnitOfWork unitOfWork = new UnitOfWork();
-        
+
         public CampaignController(ICampaignManager campaignManager)
         {
             this.campaignManager = campaignManager;
@@ -80,6 +80,59 @@ namespace Campaign.UI.Controllers
             ViewBag.Categories = categories;
 
             ViewBag.Resources = new string[] { "Categories" };
+
+            var result = unitOfWork.NetworkRepository.Get()
+                    .OrderBy(e => e.Level)
+                    .ToList();
+
+            List<object> listdata = new List<object>();
+            foreach (var resultv in result)
+            {
+                //Get root network
+                if (resultv.Level.GetLevel() == 1)
+                {
+                    listdata.Add(new
+                    {
+                        id = resultv.NetworkId,
+                        name = resultv.NetworkName,
+                        hasChild = true,
+                        expanded = true
+                    });
+                }
+                else
+                {
+                    //Check if it has child then make  hasChild = true
+                    if (unitOfWork.NetworkRepository.Get()
+    .Where(e => (bool)(e.Level.GetAncestor(1) == resultv.Level))
+    .ToList().Count > 0)
+                    {
+                        listdata.Add(new
+                        {
+                            id = resultv.NetworkId,
+                            name = resultv.NetworkName,
+                            pid = unitOfWork.NetworkRepository.Get()
+                            .FirstOrDefault(e => (bool)(e.Level == resultv.Level.GetAncestor(1))).NetworkId,
+                            hasChild = true,
+                            expanded = false
+                        });
+                    }
+                    //It doesnot have any child
+                    else
+                    {
+                        listdata.Add(new
+                        {
+                            id = resultv.NetworkId,
+                            name = resultv.NetworkName,
+                            pid = unitOfWork.NetworkRepository.Get()
+   .FirstOrDefault(e => (bool)(e.Level == resultv.Level.GetAncestor(1))).NetworkId
+                        });
+                    }
+                }
+
+            }
+
+
+            ViewBag.treeSource = listdata;
             return View("CampaignList");
         }
 

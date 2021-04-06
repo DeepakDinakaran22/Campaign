@@ -1,7 +1,8 @@
 ﻿<div class="nk-app-root">
     <div class="nk-apps-sidebar">
         <div class="nk-apps-brand">
-            <a href="/campaign/list" class="logo-link">n
+            <a href="/campaign/list" class="logo-link">
+                n
                 <img class="logo-light logo-img" src="~/images/pads4logodiap.png" srcset="~/images/pads4logodiap.png 2x" alt="logo">
                 <img class="logo-dark logo-img" src="~/images/pads4logodiap.png" srcset="~/images/pads4logodiap.png 2x" alt="logo-dark">
             </a>
@@ -79,36 +80,9 @@
                                                 <ul class="nk-menu-sub">
                                                     <li>
                                                         <div id="collapseDVR3">
-                                                            <div class="tree ">
-                                                                <ul>
-                                                                    <li class="handsymbol">
-                                                                        <span><i class="fa fa-folder-open"></i> Emaar</span>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <span><i class="fa fa-minus-square"></i> Community</span>
-                                                                                <ul>
-                                                                                    <li> <span> Demo1 </span> </li>
-                                                                                    <li> <span> Demo2 </span> </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                            <li>
-                                                                                <span><i class="fa fa-minus-square"></i> Down Town Dubai</span>
-                                                                                <ul>
-                                                                                    <li> <span> Demo1 </span> </li>
-                                                                                    <li> <span> Demo2 </span> </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                            <li>
-                                                                                <span><i class="fa fa-minus-square"></i> The Dubai Mall</span>
-                                                                                <ul>
-                                                                                    <li> <span> Digital Dominance</span> </li>
-                                                                                    <li> <span> Metro </span> </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
+                                                            <ejs-treeview id="listdata">
+                                                                <e-treeview-fields dataSource="ViewBag.treeSource" id="id" parentId="pid" text="name" hasChildren="hasChild" expanded="expanded"></e-treeview-fields>
+                                                            </ejs-treeview>
                                                         </div>
 
                                                     </li>
@@ -410,7 +384,7 @@
                                                     $(args.element).find(".e-event-save").after(btnSave);
                                                 }
 
-                                                $("#CampaignId").val(args.data.ItemJobsId);
+                                                $("#scheduleEditForm #CampaignId").val(args.data.ItemJobsId);
                                                 var statusElement = args.element.querySelector('#CampaignStatus');
                                                 if (!statusElement.classList.contains('e-dropdownlist')) {
                                                     var dropDownListObject = new ej.dropdowns.DropDownList({
@@ -441,7 +415,7 @@
                                                     new ej.calendars.DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
                                                 }
 
-                                                
+
                                             }
                                             else if (args.type === 'QuickInfo') {
                                                 sessionStorage.setItem("selectedCampaign", JSON.stringify(args.data));
@@ -469,7 +443,7 @@
                                                     text = "Started";
                                                     break;
                                                 case 5:
-                                                    text = "Approved";
+                                                    text = "Added";
                                                     break;
                                             }
                                             return text;
@@ -484,7 +458,7 @@
                                                 case "Started":
                                                     code = "2";
                                                     break;
-                                                case "Approved":
+                                                case "Added":
                                                     code = "5";
                                                     break;
                                             }
@@ -493,14 +467,14 @@
 
                                         $(document).off("click", ".e-save-campaign").on("click", ".e-save-campaign", function () {
                                             var campaign = {
-                                                ItemJobsId: $("#CampaignId").val(),
-                                                CName: $("#CName").val(),
-                                                CampaignName: $("#CampaignName").val(),
-                                                ContactNumber: $("#ContactNumber").val(),
-                                                ItemStartDate: $("#ItemStartDate").val(),
-                                                ItemEndDate: $("#ItemEndDate").val(),
-                                                CampaignStatus: GetStatusCode($("#CampaignStatus").val()),
-                                                Occurrence: $("#Occurrence").val()
+                                                ItemJobsId: $("#scheduleEditForm #CampaignId").val(),
+                                                CName: $("#scheduleEditForm #CName").val(),
+                                                CampaignName: $("#scheduleEditForm #CampaignName").val(),
+                                                ContactNumber: $("#scheduleEditForm #ContactNumber").val(),
+                                                ItemStartDate: $("#scheduleEditForm #ItemStartDate").val(),
+                                                ItemEndDate: $("#scheduleEditForm #ItemEndDate").val(),
+                                                CampaignStatus: GetStatusCode($("#scheduleEditForm #CampaignStatus").val()),
+                                                Occurrence: $("#scheduleEditForm #Occurrence").val()
                                             };
                                             callAjax("POST", "Campaign/UpdateCampaign", { campaign: campaign }, null, null, false);
                                             $(".e-schedule-dialog-container").css("display", "none");
