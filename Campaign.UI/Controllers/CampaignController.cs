@@ -9,6 +9,7 @@ namespace Campaign.UI.Controllers
     using Campaign.Data.Entities;
     using Campaign.UI.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     using System.Diagnostics;
     using System.Linq;
     public class CampaignController : Controller
@@ -68,10 +69,19 @@ namespace Campaign.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult List()
+        public IActionResult List(long networkId = 0)
         {
+
+            var nwId = Convert.ToInt64(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AppSettings")["NetworkId"]);
+            networkId = networkId == 0 ? nwId : networkId;
             var data = unitOfWork.CampaignRepository.Get().ToList();
+            if (networkId != 0)
+                data = data.Where(x => x.NetworkId == networkId).ToList();
             ViewBag.datasource = mapper.Map<List<CampaignViewModel>>(data);
+            ViewBag.category = unitOfWork.CategoryRepository.Get().ToList();
+            ViewBag.status = unitOfWork.StatusRepository.Get().ToList();
+            ViewBag.agreement = unitOfWork.JobRepository.Get().ToList();
+            ViewBag.filterCampaign = data;
 
             List<ResourceDataSourceModel> categories = new List<ResourceDataSourceModel>();
             categories.Add(new ResourceDataSourceModel { text = "Added", id = 5, groupId = 1, color = "#df5286" });

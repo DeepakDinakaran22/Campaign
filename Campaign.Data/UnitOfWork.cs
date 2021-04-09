@@ -10,6 +10,9 @@ namespace Campaign.Data
         private CampaignContext context = new CampaignContext();
         private GenericRepository<Campaign> campaignRepository;
         private GenericRepository<Category> categoryRepository;
+        private GenericRepository<CampaignStatus> statusRepository;
+        private GenericRepository<Job> jobRepository;
+
 
         private GenericRepository<Network> networkRepository;
         public GenericRepository<Campaign> CampaignRepository
@@ -21,6 +24,17 @@ namespace Campaign.Data
                     this.campaignRepository = new GenericRepository<Campaign>(context);
                 }
                 return campaignRepository;
+            }
+        }
+        public GenericRepository<Job> JobRepository
+        {
+            get
+            {
+                if (this.jobRepository == null)
+                {
+                    this.jobRepository = new GenericRepository<Job>(context);
+                }
+                return jobRepository;
             }
         }
         public GenericRepository<Category> CategoryRepository
@@ -44,6 +58,18 @@ namespace Campaign.Data
                     this.networkRepository = new GenericRepository<Network>(context);
                 }
                 return networkRepository;
+            }
+        }
+
+        public GenericRepository<CampaignStatus> StatusRepository
+        {
+            get
+            {
+                if (this.statusRepository == null)
+                {
+                    this.statusRepository = new GenericRepository<CampaignStatus>(context);
+                }
+                return statusRepository;
             }
         }
         public void Save()

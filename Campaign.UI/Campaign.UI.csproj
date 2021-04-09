@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>Campaign.UI</AssemblyName>
     <RootNamespace>Campaign.UI</RootNamespace>
+    <UserSecretsId>8b6256a6-0dab-49ba-aece-ef007e07b804</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Campaign.Data.Entities
 {
+    [Table("tblCampaignStatus")]
     public class CampaignStatus
     {
         public long CampaignStatuID { get; set; }

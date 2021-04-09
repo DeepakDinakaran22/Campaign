@@ -153,6 +153,23 @@ namespace Campaign.Data
                 .HasColumnName("Status");
             });
 
+            modelBuilder.Entity<CampaignStatus>(entity =>
+            {
+                entity.HasKey(e => e.CampaignStatuID);
+
+                entity.Property(e => e.CampaignStatuID)
+                .HasColumnName("CampaignStatuID");
+
+                entity.Property(e => e.CampaignStatusAfter)
+                .HasColumnName("CampaignStatusAfter");
+
+                entity.Property(e => e.CampaignStatusBefore)
+                .HasColumnName("CampaignStatusBefore");
+
+                entity.Property(e => e.Status)
+                .HasColumnName("Status");
+            });
+
             modelBuilder.Entity<Network>(entity =>
             {
                 entity.HasKey(e => e.NetworkId);

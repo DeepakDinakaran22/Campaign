@@ -80,7 +80,7 @@
                                                 <ul class="nk-menu-sub">
                                                     <li>
                                                         <div id="collapseDVR3">
-                                                            <ejs-treeview id="listdata">
+                                                            <ejs-treeview id="listdata"  nodeSelected="onSelect">
                                                                 <e-treeview-fields dataSource="ViewBag.treeSource" id="id" parentId="pid" text="name" hasChildren="hasChild" expanded="expanded"></e-treeview-fields>
                                                             </ejs-treeview>
                                                         </div>
@@ -481,6 +481,23 @@
                                             $(".e-schedule-dialog-container .e-schedule-dialog").removeClass("e-popup-open").addClass("e-popup-close");
                                             window.location.reload();
                                         });
+
+                                        function onSelect()
+                                        {
+                                            var networkId = this.selectedNodes[0]
+                                            window.location.href = "/Campaign/List?networkId=" + networkId;
+                                                //$.ajax({
+                                                //    url: '/Campaign/List',
+                                                //    type: 'POST',
+                                                //    data: { "networkId": networkId },
+                                                //    success: function (result) {
+                                                //         $('#nodeDetails').html(result);
+                                                //    },
+                                                //    error: function(xhr, status) {
+                                                //        console.log(status);
+                                                //    }
+                                                //})
+                                            }
                                     </script>
 
                                     @*End of schduler controller*@

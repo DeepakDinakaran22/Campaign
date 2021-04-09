@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Campaign.Data.Entities
 {
+    [Table("tblJobs")]
     public class Job
     {
         public long JobsId { get; set; }
