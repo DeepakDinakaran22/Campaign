@@ -69,14 +69,41 @@ namespace Campaign.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult List(long networkId = 0)
+        public IActionResult List(long networkId = 0, int agreement= 0, int campaign=0, int status=0, int category=0)
         {
+            var data = unitOfWork.CampaignRepository.Get().ToList();
 
             var nwId = Convert.ToInt64(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AppSettings")["NetworkId"]);
             networkId = networkId == 0 ? nwId : networkId;
-            var data = unitOfWork.CampaignRepository.Get().ToList();
+
+            ViewBag.SelectedAgreement = 0;
+            ViewBag.SelectedCampaign = 0;
+            ViewBag.SelectedStatus = 0;
+            ViewBag.SelectedCategory = 0;
+
             if (networkId != 0)
                 data = data.Where(x => x.NetworkId == networkId).ToList();
+            if (agreement != 0)
+            {
+                data = data.Where(x => x.JobsId == agreement).ToList();
+                ViewBag.SelectedAgreement = agreement;
+            }
+            if (campaign != 0)
+            {
+                data = data.Where(x => x.ItemJobsId == campaign).ToList();
+                ViewBag.SelectedCampaign = campaign;
+            }
+            if (status != 0)
+            {
+                data = data.Where(x => x.CampaignStatus == status).ToList();
+                ViewBag.SelectedStatus = status;
+            }
+            if (category != 0)
+            {
+                data = data.Where(x => x.CatgoryId == category).ToList();
+                ViewBag.SelectedCategory = category;
+            }
+
             ViewBag.datasource = mapper.Map<List<CampaignViewModel>>(data);
             ViewBag.category = unitOfWork.CategoryRepository.Get().ToList();
             ViewBag.status = unitOfWork.StatusRepository.Get().ToList();

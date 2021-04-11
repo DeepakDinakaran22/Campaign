@@ -2,7 +2,6 @@
     <div class="nk-apps-sidebar">
         <div class="nk-apps-brand">
             <a href="/campaign/list" class="logo-link">
-                n
                 <img class="logo-light logo-img" src="~/images/pads4logodiap.png" srcset="~/images/pads4logodiap.png 2x" alt="logo">
                 <img class="logo-dark logo-img" src="~/images/pads4logodiap.png" srcset="~/images/pads4logodiap.png 2x" alt="logo-dark">
             </a>
@@ -287,6 +286,73 @@
                     <div class="nk-content-body">
                         <div class="nk-block">
                             <div class="card mt-0">
+                                <div class="nk-chat-head">
+                                    <!--<div class="row gy-4 align-center">-->
+                                    <!--<div class="nk-chat-head-tools">-->
+                                    <div class="col-lg-3">
+                                        <div class="form-control-wrap ">
+                                            <select class="form-select form-control form-control-lg" data-search="on" id="selAgreement">
+                                                <option value="0">Select Agreement</option>
+                                                @foreach (var data in ViewBag.agreement)
+                                                {
+                                                    var bSelected = (ViewBag.SelectedAgreement == data.JobsId);
+                                                    <option value="@data.JobsId" selected="@bSelected">@data.AgreementName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-control-wrap ">
+                                            <select class="form-select form-control form-control-lg" data-search="on" id="selCampaign">
+                                                <option value="0">Select Campaign Name</option>
+                                                @foreach (var data in ViewBag.filterCampaign)
+                                                {
+                                                    var bSelected = (ViewBag.SelectedCampaign == data.ItemJobsId);
+                                                    <option value="@data.ItemJobsId" selected="@bSelected">@data.ItemName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-control-wrap ">
+                                            <div class="form-control-select">
+                                                <select class="form-control" id="selStatus">
+                                                    <option value="">Select Status</option>
+                                                    @foreach (var data in ViewBag.status)
+                                                    {
+                                                        var bSelected = (ViewBag.SelectedStatus == data.CampaignStatuID);
+                                                        <option value="@data.CampaignStatuID" selected="@bSelected">@data.CampaignStatusAfter</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-control-wrap ">
+                                            <div class="form-control-select">
+                                                <select class="form-control" id="selCategory">
+                                                    <option value="">Select Category</option>
+                                                    @foreach (var data in ViewBag.category)
+                                                    {
+                                                        var bSelected = (ViewBag.SelectedCategory == data.CategoryID);
+                                                        <option value="@data.CategoryID" selected="@bSelected">@data.CategoryName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3" style="visibility:hidden">
+                                        <div class="form-control-wrap ">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-outline-primary">List View</button>
+                                                <button type="button" class="btn btn-outline-primary">Availability</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--</div>-->
+                                    <!-- .nk-chat-head-search -->
+                                </div>
                                 <div class="card-inner">
                                     @*Start of scheduler controller*@
                                     <ejs-schedule id="schedule" width="100%" height="650px" popupOpen="onPopupOpen" editorTemplate="#EventEditorTemplate" currentView="TimelineYear">
@@ -373,7 +439,6 @@
                                     <script type="text/javascript">
                                         window.appUrl = '@ViewBag.ApplicationUrl';
                                         function onPopupOpen(args) {
-                                            debugger;
                                             if (args.type === 'Editor') {
                                                 $(args.element).find('.e-title-text').text("Edit Campaign");
                                                 $(args.element).find('.e-event-delete').css("display", "none");
@@ -432,6 +497,68 @@
                                             $(".e-duplicate-campaign-dialog").css("display", "flex");
                                             $(".e-duplicate-campaign-dialog .e-dlg-duplicate").removeClass("e-popup-close").addClass("e-popup-open");
                                         });
+
+                                        $(document).off("mouseup", "ul[role=listbox] li").on("mouseup", "ul[role=listbox] li", function () {
+                                            var elId = $(this).attr("id");
+                                            var selectedId = elId.split('-').pop();
+                                            if (elId.indexOf("selAgreement") > -1) {
+                                                refreshData("agreement", selectedId);
+                                            }
+                                            else if (elId.indexOf("selCampaign") > -1) {
+                                                refreshData("campaign", selectedId);
+                                            }
+                                        });
+
+                                        //$("#selAgreement").on("change", function () {
+                                        //    refreshData("agreement", $(this).val());
+                                        //});
+
+                                        //$("#selCampaign").on("change", function () {
+                                        //    refreshData("campaign", $(this).val());
+                                        //});
+
+                                        $("#selStatus").on("change", function () {
+                                            refreshData("status", $(this).val());
+                                        });
+
+                                        $("#selCategory").on("change", function () {
+                                            refreshData("category", $(this).val());
+                                        });
+
+                                        function refreshData(key, value) {
+                                            var campaignListUrl = '/Campaign/List?';
+                                            var params = getUrlParams();
+                                            params[key] = value;
+                                            campaignListUrl += createUrlParams(params);
+                                            window.location.href = campaignListUrl;
+                                        }
+
+                                        function getUrlParams() {
+                                            var vars = [], hash;
+                                            if (window.location.href.indexOf('?') > -1) {
+                                                var queryString = window.location.href.slice(window.location.href.indexOf('?') + 1);
+                                                if (queryString != "") {
+                                                    var hashes = queryString.split('&');
+                                                    for (var i = 0; i < hashes.length; i++) {
+                                                        hash = hashes[i].split('=');
+                                                        vars[hash[0]] = hash[1];
+                                                    }
+                                                }
+                                            }
+                                            return vars;
+                                        }
+
+                                        function createUrlParams(params) {
+                                            var qs = "";
+                                            for (var key in params) {
+                                                if (params.hasOwnProperty(key)) {
+                                                    qs += (qs != "") ? "&" : "";
+                                                    qs += key + "=" + params[key];
+                                                }
+                                            }
+
+                                            return qs;
+                                        }
 
                                         function GetStatusText(code) {
                                             var text = "";

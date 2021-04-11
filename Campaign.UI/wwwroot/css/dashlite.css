@@ -4895,7 +4895,7 @@ a:hover .btn-trigger:before { opacity: 1; height: 120%; width: 120%; }
   .card-head.ui-v2 .card-tools-nav li a { padding-bottom: 1rem; }
   .card-stretch { margin-left: -18px; margin-right: -18px; border-left: 0; border-right: 0; border-radius: 0; } }
 
-@media (min-width: 576px) { .card-inner { padding: 1.5rem; }
+@media (min-width: 576px) { .card-inner { padding: 0.5rem; }
   .card-inner-sm { padding-top: .75rem; padding-bottom: .75rem; }
   .card-inner-md { padding-top: 1rem; padding-bottom: 1rem; }
   .card-header { padding-left: 1.5rem; padding-right: 1.5rem; } }
@@ -14217,7 +14217,7 @@ p > span > .icon.ni { vertical-align: middle; }
 
 .nk-chat-body.show-chat { opacity: 1; pointer-events: auto; }
 
-.nk-chat-head { position: relative; display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; padding-bottom: 1rem; /* padding-left: 1rem; */ border-bottom: 1px solid #e5e9f2; background-color: #fff; }
+.nk-chat-head { position: relative; display: flex; align-items: center; justify-content: space-between; padding-top: 0.5rem; padding-bottom: 0.5rem; /* padding-left: 1rem; */ border-bottom: 1px solid #e5e9f2; background-color: #fff; }
 
 .nk-chat-head-info { width: 60%; }
 

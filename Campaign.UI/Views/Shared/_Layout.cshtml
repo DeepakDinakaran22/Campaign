@@ -48,26 +48,12 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    <div class="container body-content">
+    <div class="container body-content" style="margin-top:20px">
         @RenderBody()
     </div>
 
     <script src="~/js/bundle.js"></script>
+    <script src="~/js/scripts.js"></script>
     <ejs-scripts></ejs-scripts>
-
-    <script>
-        //$(window).on("load", function () {
-        //    $(".e-appointment").each(function () {
-        //        var left = parseInt($(this).css("left"), 10);
-        //        var width = parseInt($(this).css("width"), 10);
-        //        if (left > 0) {
-        //            var n = left / width;
-        //            var l = left - n;
-        //            $(this).css("left", l + "px");
-        //            $(this).css("width", "95px");
-        //        }
-        //    });
-        //});
-    </script>
 </body>
 </html>
